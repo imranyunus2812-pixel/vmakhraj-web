@@ -1,0 +1,65 @@
+{
+    "headers": [
+        {
+            "source": "/unity/Build/(.*)\\.wasm\\.br",
+            "headers": [
+                {
+                    "key": "Content-Encoding",
+                    "value": "br"
+                },
+                {
+                    "key": "Content-Type",
+                    "value": "application/wasm"
+                }
+            ]
+        },
+        {
+            "source": "/unity/Build/(.*)\\.js\\.br",
+            "headers": [
+                {
+                    "key": "Content-Encoding",
+                    "value": "br"
+                },
+                {
+                    "key": "Content-Type",
+                    "value": "application/javascript"
+                }
+            ]
+        },
+        {
+            "source": "/unity/Build/(.*)\\.data\\.br",
+            "headers": [
+                {
+                    "key": "Content-Encoding",
+                    "value": "br"
+                },
+                {
+                    "key": "Content-Type",
+                    "value": "application/octet-stream"
+                }
+            ]
+        },
+        {
+            "source": "/sw.js",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "no-cache"
+                },
+                {
+                    "key": "Service-Worker-Allowed",
+                    "value": "/"
+                }
+            ]
+        },
+        {
+            "source": "/manifest.webmanifest",
+            "headers": [
+                {
+                    "key": "Content-Type",
+                    "value": "application/manifest+json"
+                }
+            ]
+        }
+    ]
+}

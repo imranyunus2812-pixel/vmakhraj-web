@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="ms" data-tema="cerah">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>V-Makhraj | Pengembaraan Makhraj Huruf</title>
+    <meta name="theme-color" content="#7CC6EE">
+    <!-- Aplikasi boleh dipasang (PWA) -->
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" type="image/png" href="assets/ikon/favicon-64.png">
+    <link rel="apple-touch-icon" href="assets/ikon/apple-touch-icon.png">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="V-Makhraj">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <!-- Tema dipilih sebelum halaman dilukis supaya tiada kelipan: "cerah" (lalai) atau "gelap" -->
+    <script>try {document.documentElement.dataset.tema = localStorage.getItem('makhraj_tema') === 'gelap' ? 'gelap' : 'cerah';} catch (e) {document.documentElement.dataset.tema = 'cerah';}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@600;700&family=Noto+Serif:wght@600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Set ikon SVG (menggantikan emoji). Guna: <svg class="ik"><use href="#i-nama"/></svg> -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+        <symbol id="i-home" viewBox="0 0 24 24">
+            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+            <polyline points="9 22 9 12 15 12 15 22" />
+        </symbol>
+        <symbol id="i-book" viewBox="0 0 24 24">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+        </symbol>
+        <symbol id="i-cube" viewBox="0 0 24 24">
+            <path
+                d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
+            <path d="m3.3 7 8.7 5 8.7-5" />
+            <path d="M12 22V12" />
+        </symbol>
+        <symbol id="i-quiz" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+            <path d="M12 17h.01" />
+        </symbol>
+        <symbol id="i-flag" viewBox="0 0 24 24">
+            <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+            <line x1="4" x2="4" y1="22" y2="15" />
+        </symbol>
+        <symbol id="i-trophy" viewBox="0 0 24 24">
+            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+            <path d="M4 22h16" />
+            <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
+            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
+            <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+        </symbol>
+        <symbol id="i-star" viewBox="0 0 24 24">
+            <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+        </symbol>
+        <symbol id="i-heart" viewBox="0 0 24 24">
+            <path
+                d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+        </symbol>
+        <symbol id="i-volume" viewBox="0 0 24 24">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+        </symbol>
+        <symbol id="i-bulb" viewBox="0 0 24 24">
+            <path
+                d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+            <path d="M9 18h6" />
+            <path d="M10 22h4" />
+        </symbol>
+        <symbol id="i-arrow-left" viewBox="0 0 24 24">
+            <path d="m12 19-7-7 7-7" />
+            <path d="M19 12H5" />
+        </symbol>
+        <symbol id="i-arrow-right" viewBox="0 0 24 24">
+            <path d="M5 12h14" />
+            <path d="m12 5 7 7-7 7" />
+        </symbol>
+        <symbol id="i-play" viewBox="0 0 24 24">
+            <polygon points="6 3 20 12 6 21 6 3" />
+        </symbol>
+        <symbol id="i-maximize" viewBox="0 0 24 24">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3" />
+            <path d="M21 8V5a2 2 0 0 0-2-2h-3" />
+            <path d="M3 16v3a2 2 0 0 0 2 2h3" />
+            <path d="M16 21h3a2 2 0 0 0 2-2v-3" />
+        </symbol>
+        <symbol id="i-minimize" viewBox="0 0 24 24">
+            <path d="M8 3v3a2 2 0 0 1-2 2H3" />
+            <path d="M21 8h-3a2 2 0 0 1-2-2V3" />
+            <path d="M3 16h3a2 2 0 0 1 2 2v3" />
+            <path d="M16 21v-3a2 2 0 0 1 2-2h3" />
+        </symbol>
+        <symbol id="i-x" viewBox="0 0 24 24">
+            <path d="M18 6 6 18" />
+            <path d="m6 6 12 12" />
+        </symbol>
+        <symbol id="i-refresh" viewBox="0 0 24 24">
+            <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" />
+            <path d="M21 3v5h-5" />
+        </symbol>
+        <symbol id="i-map" viewBox="0 0 24 24">
+            <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21 3 6" />
+            <line x1="9" x2="9" y1="3" y2="18" />
+            <line x1="15" x2="15" y1="6" y2="21" />
+        </symbol>
+        <symbol id="i-lock" viewBox="0 0 24 24">
+            <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+        </symbol>
+        <symbol id="i-alert" viewBox="0 0 24 24">
+            <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+            <path d="M12 9v4" />
+            <path d="M12 17h.01" />
+        </symbol>
+        <symbol id="i-cloud" viewBox="0 0 24 24">
+            <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
+        </symbol>
+        <symbol id="i-phone" viewBox="0 0 24 24">
+            <rect width="14" height="20" x="5" y="2" rx="2" ry="2" />
+            <path d="M12 18h.01" />
+        </symbol>
+        <symbol id="i-check" viewBox="0 0 24 24">
+            <path d="M20 6 9 17l-5-5" />
+        </symbol>
+        <symbol id="i-gem" viewBox="0 0 24 24">
+            <path d="M6 3h12l4 6-10 13L2 9Z" />
+            <path d="M11 3 8 9l4 13 4-13-3-6" />
+            <path d="M2 9h20" />
+        </symbol>
+        <symbol id="i-sparkle" viewBox="0 0 24 24">
+            <path d="M12 3l1.9 5.8L20 10l-6.1 1.2L12 17l-1.9-5.8L4 10l6.1-1.2z" />
+        </symbol>
+        <symbol id="i-mic" viewBox="0 0 24 24">
+            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+            <line x1="12" x2="12" y1="19" y2="22" />
+        </symbol>
+        <symbol id="i-target" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" />
+            <circle cx="12" cy="12" r="6" />
+            <circle cx="12" cy="12" r="2" />
+        </symbol>
+        <symbol id="i-move" viewBox="0 0 24 24">
+            <polyline points="5 9 2 12 5 15" />
+            <polyline points="9 5 12 2 15 5" />
+            <polyline points="15 19 12 22 9 19" />
+            <polyline points="19 9 22 12 19 15" />
+            <line x1="2" x2="22" y1="12" y2="12" />
+            <line x1="12" x2="12" y1="2" y2="22" />
+        </symbol>
+        <symbol id="i-copy" viewBox="0 0 24 24">
+            <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+            <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+        </symbol>
+        <symbol id="i-basket" viewBox="0 0 24 24">
+            <path d="m15 11-1 9" />
+            <path d="m19 11-4-7" />
+            <path d="M2 11h20" />
+            <path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.7-7.4" />
+            <path d="M4.5 15.5h15" />
+            <path d="m5 11 4-7" />
+            <path d="m9 11 1 9" />
+        </symbol>
+        <symbol id="i-trash" viewBox="0 0 24 24">
+            <path d="M3 6h18" />
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+            <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+            <line x1="10" x2="10" y1="11" y2="17" />
+            <line x1="14" x2="14" y1="11" y2="17" />
+        </symbol>
+        <symbol id="i-user" viewBox="0 0 24 24">
+            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+        </symbol>
+        <symbol id="i-sun" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="4" />
+            <path
+                d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+        </symbol>
+        <symbol id="i-moon" viewBox="0 0 24 24">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+        </symbol>
+        <symbol id="i-image" viewBox="0 0 24 24">
+            <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+            <circle cx="9" cy="9" r="2" />
+            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+        </symbol>
+    </svg>
+
+    <div class="latar" aria-hidden="true"><i></i><i></i><i></i></div>
+
+    <header class="atas">
+        <button class="logo" data-view="home"><span class="logo-ikon"><img src="assets/logo.png" alt=""
+                    onload="this.parentElement.classList.add('ada')" onerror="this.remove()"><b
+                    class="arab">م</b></span><span>V-Makhraj</span></button>
+        <div class="atas-kanan">
+            <nav class="nav">
+                <button class="nav-btn" data-view="home"><svg class="ik" aria-hidden="true">
+                        <use href="#i-home" />
+                    </svg><em>Utama</em></button>
+                <button class="nav-btn" data-view="belajar"><svg class="ik" aria-hidden="true">
+                        <use href="#i-book" />
+                    </svg><em>Belajar</em></button>
+                <button class="nav-btn" data-view="model3d"><svg class="ik" aria-hidden="true">
+                        <use href="#i-cube" />
+                    </svg><em>Model 3D</em></button>
+                <button class="nav-btn" data-view="aktiviti"><svg class="ik" aria-hidden="true">
+                        <use href="#i-target" />
+                    </svg><em>Aktiviti</em></button>
+                <button class="nav-btn" data-view="skor"><svg class="ik" aria-hidden="true">
+                        <use href="#i-trophy" />
+                    </svg><em>Papan Skor</em></button>
+            </nav>
+            <button class="tema-btn" id="btn-tema" aria-label="Tukar tema cerah atau gelap" title="Tukar tema">
+                <svg class="ik ik-matahari" aria-hidden="true">
+                    <use href="#i-sun" />
+                </svg>
+                <svg class="ik ik-bulan" aria-hidden="true">
+                    <use href="#i-moon" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Butang Kembali: tersembunyi di halaman Utama, muncul di bahagian lain -->
+        <div class="bar-kembali" id="bar-kembali" hidden>
+            <button id="btn-kembali" class="btn-kembali" aria-label="Kembali ke tempat sebelumnya"><svg class="ik"
+                    aria-hidden="true">
+                    <use href="#i-arrow-left" />
+                </svg><span>Kembali</span></button>
+        </div>
+
+        <!-- UTAMA -->
+        <section id="view-home" class="view">
+            <div class="hero-home">
+                <div class="hero-teks">
+                    <span class="lencana">Belajar Tajwid secara interaktif</span>
+                    <h1>Terokai <span class="gradien">Makhraj Huruf</span><br>dalam 3D & Aktiviti</h1>
+                    <p>Kenali tempat keluar huruf hijaiyah, lihat model 3D, dan uji kefahaman kamu
+                        melalui pelbagai aktiviti!</p>
+                    <div class="hero-butang">
+                        <button class="btn-kaca" data-view="belajar"><svg class="ik" aria-hidden="true">
+                                <use href="#i-book" />
+                            </svg> Mari Belajar</button>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="cahaya"></div>
+                    <div class="cincin-hero"></div>
+                    <!-- GAMBAR UTAMA: simpan fail sebagai assets/hero.png (PNG lutsinar paling cantik) -->
+                    <div class="hero-gambar">
+                        <img src="assets/hero.png" alt="Model 3D kepala dan mulut"
+                            onload="this.parentElement.classList.add('ada')" onerror="this.remove()">
+                        <span class="slot"><svg class="ik" aria-hidden="true">
+                                <use href="#i-image" />
+                            </svg><b>Logo</b>
+                    </div>
+                    <span class="terapung t1 arab">ع</span>
+                    <span class="terapung t2 arab">ب</span>
+                    <span class="terapung t3 arab">ق</span>
+                    <span class="terapung t4 arab">ن</span>
+                </div>
+            </div>
+
+            <section class="slaid" aria-label="Jom terokai">
+                <div class="slaid-teks">
+                    <svg class="hiasan" viewBox="0 0 220 30" aria-hidden="true">
+                    </svg>
+                    <h2><small>Jom Terokai</small><span>Makhraj Huruf</span></h2>
+                    <div class="slaid-kawal">
+                        <button id="slaid-kiri" class="bulat-kawal" aria-label="Sebelum"><svg class="ik"
+                                aria-hidden="true">
+                                <use href="#i-arrow-left" />
+                            </svg></button>
+                        <span id="slaid-no">1/3</span>
+                        <button id="slaid-kanan" class="bulat-kawal" aria-label="Seterusnya"><svg class="ik"
+                                aria-hidden="true">
+                                <use href="#i-arrow-right" />
+                            </svg></button>
+                    </div>
+                </div>
+                <div class="slaid-baris" id="slaid-baris">
+                    <article class="kad-slaid" data-view="belajar" style="--w:#10A672" tabindex="0" role="link"
+                        aria-label="Belajar">
+                        <div class="gambar">
+                            <img src="mari_belajar.jpg" alt="" onload="this.parentElement.classList.add('ada')"
+                                onerror="this.remove()">
+                            <span class="slot"><svg class="ik" aria-hidden="true">
+                                    <use href="#i-image" />
+                                </svg>
+                        </div>
+                        <span class="no">01</span>
+                        <div class="isi">
+                            <h3>Belajar</h3>
+                            <p>Kenali jenis-jenis makhraj huruf dan dengar sebutan setiap huruf.</p>
+                            <span class="pergi" aria-hidden="true"><svg class="ik" aria-hidden="true">
+                                    <use href="#i-arrow-right" />
+                                </svg></span>
+                        </div>
+                    </article>
+                    <article class="kad-slaid" data-view="model3d" style="--w:#0E9BB5" tabindex="0" role="link"
+                        aria-label="Model 3D">
+                        <div class="gambar">
+                            <img src="3D_model.jpg" alt="" onload="this.parentElement.classList.add('ada')"
+                                onerror="this.remove()">
+                            <span class="slot"><svg class="ik" aria-hidden="true">
+                                    <use href="#i-image" />
+                                </svg>
+                        </div>
+                        <span class="no">02</span>
+                        <div class="isi">
+                            <h3>Model 3D</h3>
+                            <p>Mari belajar dengan menggunakan simulasi 3D model sebutan makhraj huruf.</p>
+                            <span class="pergi" aria-hidden="true"><svg class="ik" aria-hidden="true">
+                                    <use href="#i-arrow-right" />
+                                </svg></span>
+                        </div>
+                    </article>
+                    <article class="kad-slaid" data-view="aktiviti" style="--w:#7C5CE0" tabindex="0" role="link"
+                        aria-label="Aktiviti">
+                        <div class="gambar">
+                            <img src="aktiviti_makhraj.jpg" alt="" onload="this.parentElement.classList.add('ada')"
+                                onerror="this.remove()">
+                            <span class="slot"><svg class="ik" aria-hidden="true">
+                                    <use href="#i-image" />
+                                </svg>
+                        </div>
+                        <span class="no">03</span>
+                        <div class="isi">
+                            <h3>Aktiviti</h3>
+                            <p>Ayuh menguji tahap kefahaman anda dengan melakukan aktiviti.</p>
+                            <span class="pergi" aria-hidden="true"><svg class="ik" aria-hidden="true">
+                                    <use href="#i-arrow-right" />
+                                </svg></span>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </section>
+
+        <!-- BELAJAR -->
+        <section id="view-belajar" class="view">
+            <nav class="bel-nav bel-lain" id="bel-nav" aria-label="Bahagian Belajar">
+                <button data-ke="takrif">Takrif</button><button data-ke="pilih-makhraj">Makhraj</button><button
+                    data-ke="keliru">Huruf keliru</button><button data-ke="sifat">Sifat huruf</button>
+            </nav>
+
+            <section id="takrif" class="bel-lain bel-bahagian">
+                <p class="bel-kecil-k">Asas</p>
+                <h2 class="bel-tajuk">Apa itu makhraj?</h2>
+                <p class="bel-sub">Kenali maksud makhraj dahulu sebelum belajar tempat keluar setiap huruf.</p>
+                <div id="takrif-isi"></div>
+            </section>
+
+            <div id="pilih-makhraj" class="bel-bahagian">
+                <p class="bel-kecil-k bel-lain">Makhraj huruf</p>
+                <h2 class="bel-tajuk">Pilih makhraj <span class="maskot" aria-hidden="true"></span></h2>
+                <p class="bel-sub">Tekan kad untuk belajar. Tekan huruf untuk dengar sebutan.</p>
+                <div id="grid-makhraj" class="grid-makhraj"></div>
+                <div id="detail-makhraj" class="detail" hidden></div>
+            </div>
+
+            <section id="keliru" class="bel-lain bel-bahagian">
+                <p class="bel-kecil-k">Latihan membezakan</p>
+                <h2 class="bel-tajuk">Huruf keliru</h2>
+                <p class="bel-sub">Huruf-huruf ini sering tertukar. Bandingkan tempat keluar dan sifatnya.</p>
+                <div class="kl-pilih" id="keliru-pilih"></div>
+                <div id="keliru-panel"></div>
+            </section>
+
+            <section id="sifat" class="bel-lain bel-bahagian">
+                <p class="bel-kecil-k">Selepas makhraj</p>
+                <h2 class="bel-tajuk">Sifat huruf</h2>
+                <p class="bel-sub">Makhraj menunjukkan tempat keluar, manakala sifat menerangkan cara huruf itu disebut.
+                </p>
+                <div id="sifat-isi"></div>
+            </section>
+
+            <p class="bel-rujuk bel-lain">Rujukan: Mohd Nazri Ahmad, <i>Makhraj dan Sifat-sifat Huruf</i> (AnyFlip).
+                Kandungan diolah semula dan perlu disemak oleh ustaz.</p>
+        </section>
+
+        <!-- PERBANDINGAN HURUF KELIRU (video) -->
+        <section id="view-perbandingan" class="view"></section>
+
+        <!-- MODEL 3D -->
+        <section id="view-model3d" class="view">
+
+            <div class="kepala3d">
+                <span class="lencana-emas">MODEL 3D INTERAKTIF</span>
+                <h2>Teroka Makhraj dalam <em>3D</em></h2>
+                <p>Belajar Makhraj, Dekat dengan Al-Quran</p>
+                <div class="pemisah-emas" aria-hidden="true"><i></i><b></b><i></i></div>
+            </div>
+
+            <!-- Pentas model 3D -->
+            <div id="stage3d" class="stage3d" data-state="idle">
+                <iframe id="unity-frame" title="Model 3D Makhraj" allow="fullscreen; autoplay"></iframe>
+
+                <div class="lapisan">
+                    <img class="poster" src="assets/poster-3d.jpg" alt="" decoding="async">
+                    <div class="tabir"></div>
+
+                    <div class="pnl pnl-idle">
+                        <button id="btn-mula3d" class="btn-emas"><span class="main-ikon"><svg class="ik isi"
+                                    aria-hidden="true">
+                                    <use href="#i-play" />
+                                </svg></span>Mulakan Model
+                            3D</button>
+                        <p class="nota">Fail besar (60MB+) · disyorkan guna WiFi</p>
+                    </div>
+
+                    <div class="pnl pnl-memuat">
+                        <div class="cincin-wrap">
+                            <svg class="cincin" viewBox="0 0 120 120" aria-hidden="true">
+                                <defs>
+                                    <linearGradient id="gemas" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0" stop-color="#F7E3A6" />
+                                        <stop offset="1" stop-color="#C9983F" />
+                                    </linearGradient>
+                                </defs>
+                                <circle class="trek" cx="60" cy="60" r="52" />
+                                <circle id="cincin-isi" class="isi" cx="60" cy="60" r="52" />
+                            </svg>
+                            <b id="peratus">0%</b>
+                        </div>
+                        <p class="memuat-tajuk">Memuatkan model 3D…</p>
+                        <p id="tip3d" class="tip3d"></p>
+                    </div>
+
+                    <div class="pnl pnl-ralat">
+                        <b class="ralat-tajuk">Model 3D tidak dapat dimuatkan</b>
+                        <p id="ralat3d"></p>
+                        <button id="btn-cuba3d" class="btn-emas kecil">Cuba lagi</button>
+                    </div>
+                </div>
+
+                <i class="sudut s1"></i><i class="sudut s2"></i><i class="sudut s3"></i><i class="sudut s4"></i>
+                <button id="btn-keluar-penuh" class="keluar-penuh"><svg class="ik" aria-hidden="true">
+                        <use href="#i-x" />
+                    </svg> Keluar skrin penuh</button>
+                <div class="putar-hint"><svg class="ik" aria-hidden="true">
+                        <use href="#i-phone" />
+                    </svg> Putar telefon ke melintang</div>
+            </div>
+
+            <div class="bar3d" data-state="idle">
+                <span class="status3d"><i></i><span id="status-teks">Belum dimuatkan</span></span>
+                <div class="bar3d-btn">
+                    <button id="btn-penuh3d" class="btn-gelap"><svg class="ik" aria-hidden="true">
+                            <use href="#i-maximize" />
+                        </svg> Skrin penuh</button>
+                    <button id="btn-muat-semula3d" class="btn-gelap" disabled><svg class="ik" aria-hidden="true">
+                            <use href="#i-refresh" />
+                        </svg> Muat semula</button>
+                </div>
+            </div>
+            <p class="nota-telefon"><svg class="ik" aria-hidden="true">
+                    <use href="#i-phone" />
+                </svg> Untuk pengalaman terbaik, tekan <b>Skrin penuh</b> dan putar telefon ke
+                melintang.</p>
+
+            <div class="info3d">
+                <div class="langkah">
+                    <div class="langkah-kad"><span class="langkah-no">1</span>
+                        <div>
+                            <h4>Pilih makhraj</h4>
+                            <p>Pilih bahagian mulut pada model untuk lihat tempat keluarnya huruf.</p>
+                        </div>
+                    </div>
+                    <div class="langkah-kad"><span class="langkah-no">2</span>
+                        <div>
+                            <h4>Kenali huruf</h4>
+                            <p>Tekan huruf untuk lihat namanya dan di mana ia disebut.</p>
+                        </div>
+                    </div>
+                    <div class="langkah-kad"><span class="langkah-no">3</span>
+                        <div>
+                            <h4>Dengar sebutan</h4>
+                            <p>Tekan <b>Dengar Sebutan</b> dan ikut sebutannya dengan betul.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="belajar-pautan">
+                    <p>Mahu baca penerangan penuh? Pilih makhraj:</p>
+                    <div id="pautan-belajar" class="baris-chip"></div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- GAME PENGEMBARAAN -->
+        <!-- AKTIVITI (hub) -->
+        <section id="view-aktiviti" class="view">
+            <h2 class="tajuk">Aktiviti</h2>
+            <p class="sub">Pilih aktiviti untuk melatih huruf dan makhraj.</p>
+            <div class="pemain-bar" data-pemain-bar></div>
+            <div class="hub">
+                <button class="kad-aktiviti" data-view="game" style="--w:#7C5CE0">
+                    <span class="ka-ikon"><svg class="ik" aria-hidden="true">
+                            <use href="#i-quiz" />
+                        </svg></span>
+                    <h3>Kuiz Pengembaraan</h3>
+                    <p>Lepasi halangan dengan menjawab soalan. Termasuk huruf dalam ayat Al-Fatihah.</p>
+                    <span class="ka-bawah"><span class="ka-tag">5 dunia</span><span class="ka-pergi">Main <svg
+                                class="ik" aria-hidden="true">
+                                <use href="#i-arrow-right" />
+                            </svg></span></span>
+                </button>
+                <button class="kad-aktiviti" data-view="padanan" style="--w:#10A672">
+                    <span class="ka-ikon"><svg class="ik" aria-hidden="true">
+                            <use href="#i-copy" />
+                        </svg></span>
+                    <h3>Padanan Kad</h3>
+                    <p>Balikkan kad dan padankan huruf dengan tempat keluarnya.</p>
+                    <span class="ka-bawah"><span class="ka-tag">Mudah</span><span class="ka-pergi">Main <svg class="ik"
+                                aria-hidden="true">
+                                <use href="#i-arrow-right" />
+                            </svg></span></span>
+                </button>
+                <button class="kad-aktiviti" data-view="susun" style="--w:#D98E04">
+                    <span class="ka-ikon"><svg class="ik" aria-hidden="true">
+                            <use href="#i-basket" />
+                        </svg></span>
+                    <h3>Susun Huruf</h3>
+                    <p>Huruf jatuh dari atas. Masukkan ke bakul makhraj yang betul.</p>
+                    <span class="ka-bawah"><span class="ka-tag">Berlumba masa</span><span class="ka-pergi">Main <svg
+                                class="ik" aria-hidden="true">
+                                <use href="#i-arrow-right" />
+                            </svg></span></span>
+                </button>
+                <button class="kad-aktiviti" data-view="seret" style="--w:#DB2777">
+                    <span class="ka-ikon"><svg class="ik" aria-hidden="true">
+                            <use href="#i-move" />
+                        </svg></span>
+                    <h3>Seret Huruf</h3>
+                    <p>Seret huruf ke kawasan yang betul pada kepala.</p>
+                    <span class="ka-bawah"><span class="ka-tag">Sederhana</span><span class="ka-pergi">Main <svg
+                                class="ik" aria-hidden="true">
+                                <use href="#i-arrow-right" />
+                            </svg></span></span>
+                </button>
+                <button class="kad-aktiviti" data-view="cari" style="--w:#0E9BB5">
+                    <span class="ka-ikon"><svg class="ik" aria-hidden="true">
+                            <use href="#i-target" />
+                        </svg></span>
+                    <h3>Cari di Model 3D</h3>
+                    <p>Dapatkan tempat keluar sesuatu huruf pada model.</p>
+                    <span class="ka-bawah"><span class="ka-tag">Model 3D</span><span class="ka-pergi">Main <svg
+                                class="ik" aria-hidden="true">
+                                <use href="#i-arrow-right" />
+                            </svg></span></span>
+                </button>
+            </div>
+        </section>
+        <section id="view-padanan" class="view"></section>
+        <section id="view-susun" class="view"></section>
+        <section id="view-seret" class="view"></section>
+        <section id="view-cari" class="view"></section>
+        <section id="view-skor" class="view"></section>
+
+        <section id="view-game" class="view">
+
+            <!-- Peta dunia -->
+            <div id="peta">
+                <div class="pemain-bar" data-pemain-bar></div>
+                <h2 class="tajuk">Kuiz Pengembaraan Makhraj</h2>
+                <p class="sub">Lepasi halangan dengan menjawab soalan betul. Ada checkpoint jika kamu terjatuh!</p>
+                <div id="denai" class="denai"></div>
+                <div class="baris-tengah"><button id="btn-reset" class="btn-teks">Padam kemajuan</button></div>
+            </div>
+
+            <!-- Ulang kaji sebelum dunia -->
+            <div id="intro-dunia" class="intro-dunia" hidden></div>
+
+            <!-- Arena -->
+            <div id="arena" hidden>
+                <div class="hud">
+                    <button id="btn-peta" class="btn-kaca kecil"><svg class="ik" aria-hidden="true">
+                            <use href="#i-map" />
+                        </svg> Peta</button>
+                    <div class="hud-tengah"><b id="hud-nama"></b><small id="hud-halangan"></small></div>
+                    <div id="hud-hati" class="hud-hati"></div>
+                </div>
+
+                <div id="pentas" class="pentas">
+                    <div class="matahari"></div>
+                    <span class="awan" style="top:18px;animation-duration:38s"><svg class="ik" aria-hidden="true">
+                            <use href="#i-cloud" />
+                        </svg></span>
+                    <span class="awan" style="top:60px;animation-duration:55s;animation-delay:-20s"><svg class="ik"
+                            aria-hidden="true">
+                            <use href="#i-cloud" />
+                        </svg></span>
+                    <div class="bukit"></div>
+                    <div class="tanah"></div>
+                    <div id="lorong" class="lorong"></div>
+                    <div id="hero" class="hero arab">ب</div>
+                    <div id="toast" class="toast" hidden></div>
+                </div>
+
+                <div class="kad-soalan">
+                    <div class="ks-atas"><span id="s-no" class="ks-no"></span><span id="s-jenis"
+                            class="ks-jenis"></span></div>
+                    <h3 id="s-tanya" class="s-tanya"></h3>
+                    <button id="s-besar" class="s-besar" title="Tekan untuk dengar"></button>
+                    <div id="s-pilihan" class="s-pilihan"></div>
+                    <p id="s-maklum" class="s-maklum"></p>
+                    <div id="s-terang" class="ks-terang" hidden></div>
+                    <div class="ks-butang">
+                        <button id="btn-bantu" class="btn-kaca kecil"><svg class="ik" aria-hidden="true">
+                                <use href="#i-bulb" />
+                            </svg> Bantuan 50:50 (<b id="bantu-baki">2</b>)</button>
+                        <button id="btn-lagi" class="btn-utama" hidden>Cuba soalan serupa <svg class="ik"
+                                aria-hidden="true">
+                                <use href="#i-refresh" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <div id="modal" class="modal" hidden>
+        <div id="modal-isi" class="modal-kad"></div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="data2.js"></script>
+    <script src="app.js"></script>
+    <script src="skor.js"></script>
+    <script src="aktiviti.js"></script>
+</body>
+
+</html>
