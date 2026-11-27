@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#06282a">
+  <title>V-Makhraj 3D</title>
+  <link rel="icon" href="TemplateData/favicon.ico">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { width:100%; height:100%; margin:0; padding:0; overflow:hidden; background:#06282a; }
+    #unity-container { position:fixed; inset:0; width:100%; height:100%; background:#06282a; }
+    #unity-canvas { display:block; width:100%; height:100%; outline:none; background:#06282a; }
+    #unity-loading-container { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(6,40,42,.92); z-index:2; }
+    #unity-loading-box { width:min(78%,320px); text-align:center; color:#f0d58c; font:14px/1.5 system-ui,sans-serif; }
+    #unity-loading-title { margin-bottom:12px; font-weight:600; }
+    #unity-progress-track { width:100%; height:8px; overflow:hidden; border-radius:20px; background:rgba(240,213,140,.18); border:1px solid rgba(240,213,140,.45); }
+    #unity-progress-fill { width:0%; height:100%; border-radius:inherit; background:linear-gradient(90deg,#0bb7a8,#f0d58c); transition:width .15s linear; }
+    #unity-warning { position:absolute; left:50%; top:12px; transform:translateX(-50%); z-index:5; width:min(92%,600px); color:#fff; font:13px/1.4 system-ui,sans-serif; text-align:center; display:none; }
+    #unity-warning div { margin:4px 0; padding:9px 12px; border-radius:8px; background:#8b2929; }
+  </style>
+</head>
+<body>
+  <main id="unity-container">
+    <canvas id="unity-canvas" tabindex="-1" aria-label="Model 3D Makhraj"></canvas>
+    <div id="unity-loading-container"><div id="unity-loading-box"><div id="unity-loading-title">Memuatkan model 3D…</div><div id="unity-progress-track"><div id="unity-progress-fill"></div></div></div></div>
+    <div id="unity-warning"></div>
+  </main>
+  <script>
+    const canvas = document.getElementById('unity-canvas');
+    const loading = document.getElementById('unity-loading-container');
+    const progressFill = document.getElementById('unity-progress-fill');
+    const warning = document.getElementById('unity-warning');
+    let unityInstance = null;
+    function reportToWebsite(type, extra = {}) {
+      if (window.parent && window.parent !== window) window.parent.postMessage({ src:'vmakhraj-unity', type, ...extra }, '*');
+    }
+    function showUnityMessage(message, isError = false) {
+      const item = document.createElement('div'); item.textContent = message; warning.appendChild(item); warning.style.display = 'block';
+      if (!isError) setTimeout(() => item.remove(), 5000);
+    }
+    const buildUrl = 'Build';
+    const config = {
+      dataUrl: buildUrl + '/MakhrajWeb.data',
+      frameworkUrl: buildUrl + '/MakhrajWeb.framework.js',
+      codeUrl: buildUrl + '/MakhrajWeb.wasm',
+      streamingAssetsUrl: 'StreamingAssets',
+      companyName: 'DefaultCompany', productName: 'MakhrajSystem', productVersion: '0.1.0',
+      showBanner: showUnityMessage
+    };
+    const loader = document.createElement('script');
+    loader.src = buildUrl + '/MakhrajWeb.loader.js';
+    loader.onload = () => {
+      createUnityInstance(canvas, config, (progress) => {
+        progressFill.style.width = (progress * 100) + '%';
+        reportToWebsite('progress', { value: progress });
+      }).then((instance) => {
+        unityInstance = instance; loading.style.display = 'none'; reportToWebsite('ready');
+      }).catch((error) => {
+        loading.style.display = 'none'; showUnityMessage(String(error), true);
+        reportToWebsite('error', { message:String(error) }); console.error('Unity WebGL failed to start:', error);
+      });
+    };
+    loader.onerror = () => {
+      const message = 'Unity loader tidak dapat dimuatkan. Semak folder unity/Build.';
+      loading.style.display = 'none'; showUnityMessage(message, true); reportToWebsite('error', { message });
+    };
+    document.body.appendChild(loader);
+    window.addEventListener('message', (event) => {
+      const data = event.data;
+      if (!data || data.type !== 'makhraj' || !unityInstance) return;
+      const allowed = ['jauf','halq','lisan','syafatain','khaisyum'];
+      if (!allowed.includes(data.id)) return;
+      try { unityInstance.SendMessage('GameManager','TunjukMakhraj',data.id); }
+      catch (error) { console.warn('Unity makhraj selection could not be sent:', error); }
+    });
+  </script>
+</body>
+</html>
