@@ -2950,14 +2950,14 @@ body[data-tab="home"] main {
     line-height: 1.1;
 }
 
-.slaid-teks h2 small {
+.slaid-teks h2>small {
     display: block;
     font-size: 1.35rem;
     font-weight: 500;
     color: #dfe6ff;
 }
 
-.slaid-teks h2 span {
+.slaid-teks h2>span {
     display: block;
     font-size: 2.5rem;
     font-weight: 700;
@@ -3110,7 +3110,7 @@ body[data-tab="home"] main {
         margin-bottom: 14px;
     }
 
-    .slaid-teks h2 span {
+    .slaid-teks h2>span {
         font-size: 2rem;
     }
 }
@@ -6102,7 +6102,7 @@ html[data-tema] .hero-teks h1,
 html[data-tema] .kepala3d h2,
 html[data-tema] .in-kepala h2,
 html[data-tema] .modal-kad h2,
-html[data-tema] .slaid-teks h2 span {
+html[data-tema] .slaid-teks h2>span {
     color: var(--teks);
 }
 
@@ -7606,5 +7606,152 @@ html[data-tema] .bakul small {
 
     html[data-tema] #view-susun .bakul-baris {
         margin-top: 8px;
+    }
+}
+
+/* =====================================================
+   VERSI 16: Animasi masuk (dikawal oleh animasi.js)
+   Guna sifat translate/scale supaya tidak bercanggah dengan transform sedia ada.
+   ===================================================== */
+.muncul:not(.nampak) {
+    opacity: 0;
+}
+
+.muncul[data-anim="kata"]:not(.nampak) {
+    opacity: 1;
+}
+
+.muncul[data-anim="kata"]:not(.nampak) .kata {
+    opacity: 0;
+}
+
+.muncul.nampak[data-anim="naik"] {
+    animation: anim-naik .6s cubic-bezier(.2, .8, .25, 1) var(--tunda, 0ms) backwards;
+}
+
+.muncul.nampak[data-anim="pop"] {
+    animation: anim-pop .65s cubic-bezier(.2, .9, .3, 1.25) var(--tunda, 0ms) backwards;
+}
+
+.muncul.nampak[data-anim="kiri"] {
+    animation: anim-kiri .55s cubic-bezier(.2, .8, .25, 1) var(--tunda, 0ms) backwards;
+}
+
+.muncul.nampak[data-anim="cip"] {
+    animation: anim-cip .5s cubic-bezier(.3, 1.4, .5, 1) var(--tunda, 0ms) backwards;
+}
+
+.kata {
+    display: inline-block;
+}
+
+.muncul.nampak[data-anim="kata"] .kata {
+    animation: anim-kata .7s cubic-bezier(.2, .9, .3, 1.3) calc(var(--tunda, 0ms) + var(--i, 0) * 80ms) backwards;
+}
+
+@keyframes anim-naik {
+    from {
+        opacity: 0;
+        translate: 0 22px;
+    }
+}
+
+@keyframes anim-pop {
+    from {
+        opacity: 0;
+        translate: 0 26px;
+        scale: .92;
+    }
+}
+
+@keyframes anim-kiri {
+    from {
+        opacity: 0;
+        translate: -28px 0;
+    }
+}
+
+@keyframes anim-cip {
+    from {
+        opacity: 0;
+        scale: .6;
+    }
+}
+
+@keyframes anim-kata {
+    0% {
+        opacity: 0;
+        translate: 0 .55em;
+        rotate: -6deg;
+    }
+
+    60% {
+        opacity: 1;
+    }
+}
+
+/* Header: muncul sekali semasa laman dibuka (skrin besar sahaja; di telefon menu bawah adalah tetap) */
+@media (min-width: 761px) {
+    .atas {
+        animation: anim-header .6s cubic-bezier(.2, .8, .25, 1) backwards;
+    }
+}
+
+.atas .logo,
+.atas .nav-btn,
+.atas .tema-btn {
+    animation: anim-cip .5s cubic-bezier(.3, 1.4, .5, 1) backwards;
+}
+
+.atas .logo {
+    animation-delay: .15s;
+}
+
+.atas .nav-btn:nth-child(1) {
+    animation-delay: .22s;
+}
+
+.atas .nav-btn:nth-child(2) {
+    animation-delay: .28s;
+}
+
+.atas .nav-btn:nth-child(3) {
+    animation-delay: .34s;
+}
+
+.atas .nav-btn:nth-child(4) {
+    animation-delay: .40s;
+}
+
+.atas .nav-btn:nth-child(5) {
+    animation-delay: .46s;
+}
+
+.atas .tema-btn {
+    animation-delay: .52s;
+}
+
+@keyframes anim-header {
+    from {
+        translate: 0 -100%;
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .atas,
+    .atas .logo,
+    .atas .nav-btn,
+    .atas .tema-btn,
+    .muncul,
+    .kata,
+    .maskot {
+        animation: none !important;
+    }
+
+    .muncul:not(.nampak),
+    .muncul:not(.nampak) .kata {
+        opacity: 1 !important;
     }
 }
