@@ -8,7 +8,7 @@ const rawak = a => a[Math.floor(Math.random() * a.length)];
 // Kocok Fisher-Yates: setiap susunan mempunyai peluang yang sama
 const kocok = a => {
     const b = [...a];
-    for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; }
+    for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1));[b[i], b[j]] = [b[j], b[i]]; }
     return b;
 };
 
@@ -146,6 +146,7 @@ function papar(view, opsyen = {}) {
     if (view === 'game') tunjukPeta();
     if (view === 'home') kemasHome();
     if (typeof Aktiviti !== 'undefined') Aktiviti.papar(view);
+    if (typeof Animasi !== 'undefined') Animasi.view(view); // main semula animasi masuk
 }
 document.addEventListener('click', e => {
     const t = e.target.closest('[data-view]');
@@ -514,19 +515,19 @@ function binaSoalan(d) {
     } else if (d.id === 'halq') {
         const m = M('halq'), t = kocok(m.tempat), [k1, k2] = kocok(keliruUntuk('halq'));
         q = [tanda(qTempat(m, t[0]), 'tempat'), tanda(qTempat(m, t[1]), 'tempat'), tanda(qTempatHuruf(m, t[2]), 'tempat'),
-            tanda(qDengar('halq'), 'dengar'), tanda(qKeliru(k1), 'keliru'), tanda(qKeliru(k2), 'keliru')];
+        tanda(qDengar('halq'), 'dengar'), tanda(qKeliru(k1), 'keliru'), tanda(qKeliru(k2), 'keliru')];
     } else if (d.id === 'syafatain') {
         const m = M('syafatain'), [a, b] = kocok(m.tempat);
         q = [tanda(qHurufMakhraj(huruf('ف')), 'makhraj'), tanda(qMakhrajHuruf(m), 'makhraj'), tanda(qTempat(m, a), 'tempat'),
-            tanda(qTempat(m, b), 'tempat'), tanda(qTempatHuruf(m, rawak([a, b])), 'tempat'), tanda(qDengar('syafatain'), 'dengar')];
+        tanda(qTempat(m, b), 'tempat'), tanda(qTempatHuruf(m, rawak([a, b])), 'tempat'), tanda(qDengar('syafatain'), 'dengar')];
     } else if (d.id === 'lisan') {
         const m = M('lisan'), t = kocok(m.tempat), k = kocok(keliruUntuk('lisan'));
         q = [tanda(qTempat(m, t[0]), 'tempat'), tanda(qTempat(m, t[1]), 'tempat'), tanda(qTempatHuruf(m, t[2]), 'tempat'),
-            tanda(qDengar('lisan'), 'dengar'), tanda(qKeliru(k[0]), 'keliru'), tanda(qKeliru(k[1]), 'keliru')];
+        tanda(qDengar('lisan'), 'dengar'), tanda(qKeliru(k[0]), 'keliru'), tanda(qKeliru(k[1]), 'keliru')];
     } else { // Istana: campuran semua
         const lisan = M('lisan');
         q = [tanda(qHurufMakhraj(rawak(HURUF_KUIZ)), 'makhraj'), tanda(qMakhrajHuruf(M(rawak(['jauf', 'halq', 'lisan', 'syafatain']))), 'makhraj'),
-            tanda(qAyat(), 'ayat'), tanda(qTempatHuruf(lisan, rawak(lisan.tempat)), 'tempat'), tanda(qDengar(), 'dengar'), tanda(qKeliru(rawak(KELIRU)), 'keliru')];
+        tanda(qAyat(), 'ayat'), tanda(qTempatHuruf(lisan, rawak(lisan.tempat)), 'tempat'), tanda(qDengar(), 'dengar'), tanda(qKeliru(rawak(KELIRU)), 'keliru')];
     }
     // kocok, kemudian susun mengikut tahap (mudah dahulu)
     return kocok(q).sort((a, b) => a.tahap - b.tahap);
