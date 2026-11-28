@@ -7757,21 +7757,24 @@ html[data-tema] .bakul small {
 }
 
 /* =====================================================
-   VERSI 17: Logo rasmi V-Makhraj (assets/vmakhraj_Logo.png)
-   Header: jubin kecil. Halaman Utama: kad segi empat tepat (nisbah 3:2), tanpa animasi.
+   VERSI 17: Logo rasmi V-Makhraj (assets/vmakhraj_Logo.png, latar lutsinar)
+   Header dan halaman Utama: logo terus di atas latar, tanpa kotak dan tanpa animasi berterusan.
    ===================================================== */
 html[data-tema] .logo-ikon {
-    width: 46px;
+    width: 50px;
     height: 46px;
-    border-radius: 14px;
+    border-radius: 0;
 }
 
 html[data-tema] .logo-ikon.ada {
-    background: #00061A;
+    background: none;
+    border: 0;
+    box-shadow: none;
+    overflow: visible;
 }
 
 html[data-tema] .logo-ikon img {
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
 }
 
@@ -7780,17 +7783,17 @@ html[data-tema] .cincin-hero {
 }
 
 html[data-tema] .hero-gambar {
-    width: min(460px, 92%);
-    aspect-ratio: 3 / 2;
-    border-radius: 20px;
-    overflow: hidden;
-    background: #00061A;
-    border: 3px solid var(--ink);
-    box-shadow: 7px 8px 0 var(--ink);
+    width: min(440px, 92%);
+    aspect-ratio: 1054 / 951;
+    border-radius: 0;
+    overflow: visible;
+    background: none;
+    border: 0;
+    box-shadow: none;
 }
 
 html[data-tema] .hero-gambar img {
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
     filter: none;
     animation: none;
@@ -7802,11 +7805,11 @@ html[data-tema] .hero-gambar.ada .slot {
 
 @media (max-width: 760px) {
     html[data-tema] .logo-ikon {
-        width: 40px;
+        width: 44px;
         height: 40px;
     }
 
     html[data-tema] .hero-gambar {
-        width: 92%;
+        width: min(300px, 80%);
     }
 }
