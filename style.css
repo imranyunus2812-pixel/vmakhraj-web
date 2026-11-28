@@ -7758,8 +7758,7 @@ html[data-tema] .bakul small {
 
 /* =====================================================
    VERSI 17: Logo rasmi V-Makhraj (assets/vmakhraj_Logo.png)
-   Fail yang sama dipakai di header dan halaman Utama. Berfungsi untuk logo
-   berlatar lutsinar atau logo asal berlatar hitam (dipotong dalam bulatan).
+   Header: jubin kecil. Halaman Utama: kad segi empat tepat (nisbah 3:2), tanpa animasi.
    ===================================================== */
 html[data-tema] .logo-ikon {
     width: 46px;
@@ -7777,40 +7776,28 @@ html[data-tema] .logo-ikon img {
 }
 
 html[data-tema] .cincin-hero {
-    width: 360px;
-    height: 360px;
-    background: radial-gradient(circle, #FFFFFF 0, #EAF6FF 70%);
-    opacity: 1;
-}
-
-html[data-tema="gelap"] .cincin-hero {
-    background: radial-gradient(circle, #0E1A4A 0, #050B26 75%);
-    box-shadow: 8px 9px 0 var(--ink), 0 0 60px -6px rgba(56, 140, 255, .55);
+    display: none;
 }
 
 html[data-tema] .hero-gambar {
-    width: 360px;
-    max-width: 86vw;
-    aspect-ratio: 1;
-    border-radius: 50%;
+    width: min(460px, 92%);
+    aspect-ratio: 3 / 2;
+    border-radius: 20px;
     overflow: hidden;
+    background: #00061A;
+    border: 3px solid var(--ink);
+    box-shadow: 7px 8px 0 var(--ink);
 }
 
 html[data-tema] .hero-gambar img {
     object-fit: cover;
     object-position: center;
-    filter: drop-shadow(0 8px 18px rgba(30, 110, 230, .35));
-    animation: logo-apung 5s ease-in-out infinite;
+    filter: none;
+    animation: none;
 }
 
 html[data-tema] .hero-gambar.ada .slot {
     display: none;
-}
-
-@keyframes logo-apung {
-    50% {
-        translate: 0 -8px;
-    }
 }
 
 @media (max-width: 760px) {
@@ -7819,15 +7806,7 @@ html[data-tema] .hero-gambar.ada .slot {
         height: 40px;
     }
 
-    html[data-tema] .cincin-hero,
     html[data-tema] .hero-gambar {
-        width: 270px;
-        height: 270px;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    html[data-tema] .hero-gambar img {
-        animation: none;
+        width: 92%;
     }
 }
